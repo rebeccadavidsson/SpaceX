@@ -1,11 +1,15 @@
-import { CrewMember } from '../../features/crew/types';
+import Search from '../components/Search';
+import { useAppSelector } from '../hooks';
+import { selectCrew } from '../../features/crew/selectors';
 
+const CrewPage = () => {
+    const crewData = useAppSelector(selectCrew);
 
-const CrewPage = (props: { crewData: CrewMember[] | undefined }) => {
     return (
-        <div>
-            halo
+        <div className="container">
+            {crewData.length && <Search data={crewData}/>}
         </div>
-    );
+    )
+
 }
 export default CrewPage;

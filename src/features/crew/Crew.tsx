@@ -4,7 +4,6 @@ import CrewMemberCard from '../../app/components/CrewMemberCard';
 import ScrollReveal from '../../utils/ScrollReveal';
 
 export function Crew({crewData}: { crewData: CrewMember[] }) {
-
     const chunkSize = 3;
     const getGridChunks = (crewData: CrewMember[]) => {
         return [...Array(Math.ceil(crewData.length / chunkSize))].map(_ => crewData.splice(0, chunkSize));
@@ -53,9 +52,7 @@ export function Crew({crewData}: { crewData: CrewMember[] }) {
                 }
             </div>
         </ScrollReveal>
-
-    )
-        ;
+    );
 }
 
 export default Crew;

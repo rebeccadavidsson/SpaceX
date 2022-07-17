@@ -3,17 +3,18 @@ import scrollReveal from "scrollreveal";
 
 interface ScrollRevealProps {
     children?: JSX.Element;
+    delay?: number;
 }
 
-const ScrollReveal: FC<ScrollRevealProps> = ({ children }) => {
+const ScrollReveal: FC<ScrollRevealProps> = ({ children, delay }) => {
     const sectionRef = useRef<HTMLElement>(null);
     useEffect(() => {
         if (sectionRef.current)
             scrollReveal().reveal(sectionRef.current, {
                 reset: false,
-                delay: 500
+                delay: delay ?? 500
             });
-    }, []);
+    }, [delay]);
 
     return (
         <section

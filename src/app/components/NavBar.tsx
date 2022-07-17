@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 const NavBar = () => {
     return (<nav className=" px-2 sm:px-4 py-10">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
-            <a href="https://github.com/r-spacex/SpaceX-API" className="flex items-center">
+            <Link to={"/"}>
                 <span
                     className="self-center text-xl font-semibold whitespace-nowrap"><strong>SpaceX</strong></span>
-            </a>
+            </Link>
 
             <div className="block w-auto">
                 <ul className="flex flex-row space-x-8 mt-0 text-sm font-medium">
