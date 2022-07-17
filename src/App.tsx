@@ -38,7 +38,7 @@ function App() {
                     <NavBar/>
                     <Routes>
                         <Route path="/" element={<Home companyData={companyData} crewData={crewData}/>}/>
-                        <Route path="/crew" element={<CrewPage/>}/>
+                        <Route path="/crew" element={<CrewPage crewData={crewData}/>}/>
                     </Routes>
                     <Footer links={companyData?.links}/>
                 </div>

@@ -53,9 +53,11 @@ export const getCrew = () => {
     return (dispatch: Dispatch<any>) => {
         dispatch(loadingCrew());
 
+        // Load alread-liked members from localstorage and save to store
         const likedMemberIds = JSON.parse(localStorage.getItem(LIKED_MEMBERS) || '{}');
         likedMemberIds && dispatch(setLikedMembers(likedMemberIds));
 
+        // Fetch data from API
         fetchCrewData()
             .then(({data}) => {
                 if (data.length) {

@@ -10,11 +10,12 @@ const Home = (props: { companyData: CompanyData | undefined, crewData: CrewMembe
     const crewStatus = useAppSelector(selectCrewStatus);
 
     return <main className="container mb-auto">
-        {props.companyData && <ScrollReveal>
-            <Company companyData={props.companyData}/>
-        </ScrollReveal>}
-
-        {props.crewData?.length && crewStatus === 1 && <Crew crewData={props.crewData}/>}
+        {props.companyData?.name ?
+            <ScrollReveal>
+                <Company companyData={props.companyData}/>
+            </ScrollReveal> : null}
+        {props.crewData?.length && crewStatus === 1 ?
+            <Crew crewData={props.crewData}/> : null}
     </main>;
 }
 export default Home;

@@ -658,6 +658,10 @@ video {
   height: 100vh;
 }
 
+.h-auto {
+  height: auto;
+}
+
 .h-64 {
   height: 16rem;
 }
@@ -842,10 +846,6 @@ video {
 
 .pl-10 {
   padding-left: 2.5rem;
-}
-
-.pb-24 {
-  padding-bottom: 6rem;
 }
 
 .pb-8 {
@@ -1048,6 +1048,14 @@ video {
   .md\:py-12 {
     padding-top: 3rem;
     padding-bottom: 3rem;
+  }
+
+  .md\:pt-40 {
+    padding-top: 10rem;
+  }
+
+  .md\:pb-40 {
+    padding-bottom: 10rem;
   }
 
   .md\:pb-24 {

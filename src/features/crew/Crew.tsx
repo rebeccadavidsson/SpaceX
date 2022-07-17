@@ -6,14 +6,16 @@ import ScrollReveal from '../../utils/ScrollReveal';
 export function Crew({crewData}: { crewData: CrewMember[] }) {
     const chunkSize = 3;
     const getGridChunks = (crewData: CrewMember[]) => {
-        return [...Array(Math.ceil(crewData.length / chunkSize))].map(_ => crewData.splice(0, chunkSize));
+        const data = [...crewData];
+        return [...Array(Math.ceil(data.length / chunkSize))].map(_ => data.splice(0, chunkSize));
     }
 
     const [crew, setCrew] = useState<CrewMember[][]>([]);
     const [showButton, setShowButton] = useState(true);
 
     useEffect(() => {
-        setCrew(getGridChunks(crewData.slice(0, chunkSize)));
+        const data = [...crewData];
+        setCrew(getGridChunks(data.slice(0, chunkSize)));
     }, [crewData]);
 
 
@@ -24,20 +26,21 @@ export function Crew({crewData}: { crewData: CrewMember[] }) {
 
                 {crew.map((grid: CrewMember[], row: number) => {
                     return (
-                        <ScrollReveal>
-                            <div
-                                className={"reveal-from-left md:w-full md:flex md:pb-24 " +
-                                    (row % 2 === 0 ? "justify-end" : "justify-start")}>
-                                <div className="md:w-3/5 grid grid-cols-1 gap-8 mt-8 xl:mt-0 md:grid-cols-3"
-                                     key={"row" + row}>
-                                    {grid.map((member: CrewMember) => {
-                                        return (
-                                            <CrewMemberCard key={member.id} member={member}/>
-                                        )
-                                    })}
+                        <div key={"row" + row}>
+                            <ScrollReveal>
+                                <div
+                                    className={"reveal-from-left md:w-full md:flex md:pb-24 " +
+                                        (row % 2 === 0 ? "justify-end" : "justify-start")}>
+                                    <div className="md:w-3/5 grid grid-cols-1 gap-8 mt-8 xl:mt-0 md:grid-cols-3">
+                                        {grid.map((member: CrewMember) => {
+                                            return (
+                                                <CrewMemberCard key={member.id} member={member}/>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
-                        </ScrollReveal>
+                            </ScrollReveal>
+                        </div>
                     )
                 })}
 

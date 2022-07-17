@@ -19,12 +19,12 @@ const Search: FC<SearchProps> = ({data}) => {
 
     const sortByName = (): void => {
         setSortCategory('name');
-        setSortedData(data.sort((a: CrewMember, b: CrewMember) => a['name'].localeCompare(b['name'])));
+        setSortedData([...data].sort((a: CrewMember, b: CrewMember) => a['name'].localeCompare(b['name'])));
     };
 
     const sortByAgency = (): void => {
         setSortCategory('agency')
-        setSortedData(data.sort((a: CrewMember, b: CrewMember) => a.agency.localeCompare(b.agency)));
+        setSortedData([...data].sort((a: CrewMember, b: CrewMember) => a.agency.localeCompare(b.agency)));
     };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

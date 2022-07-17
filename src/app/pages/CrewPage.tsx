@@ -1,13 +1,11 @@
 import Search from '../components/Search';
-import { useAppSelector } from '../hooks';
-import { selectCrew } from '../../features/crew/selectors';
+import { CrewMember } from '../../features/crew/types';
 
-const CrewPage = () => {
-    const crewData = useAppSelector(selectCrew);
+const CrewPage = (props: { crewData: CrewMember[] }) => {
 
     return (
         <div className="container">
-            {crewData.length && <Search data={crewData}/>}
+            {props.crewData.length ? <Search data={props.crewData}/> : null}
         </div>
     )
 
