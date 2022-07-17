@@ -1,58 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import React, { useEffect } from 'react';
+import './tailwind.output.css'
 import './App.css';
+import NavBar from './app/components/NavBar';
+import Footer from './app/components/Footer';
+import Home from './app/pages/Home';
+import CrewPage from './app/pages/CrewPage';
+import { useAppDispatch, useAppSelector } from './app/hooks';
+import { selectCompany } from './features/company/selectors';
+import { getCompany } from './features/company/actions';
+import { selectCrew } from './features/crew/selectors';
+import { getCrew } from './features/crew/actions';
+
+
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route
+} from "react-router-dom";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+
+    const dispatch = useAppDispatch();
+    const companyData = useAppSelector(selectCompany);
+    const crewData = useAppSelector(selectCrew);
+
+    useEffect(() => {
+        dispatch(getCompany());
+        dispatch(getCrew());
+    }, [dispatch]);
+
+
+    return (
+        <Router>
+            <div className="App font-lato flex flex-col h-screen justify-between">
+                <NavBar/>
+                <Routes>
+                    <Route path="/" element={<Home companyData={companyData} crewData={crewData}/>} />
+                    <Route path="/crew" element={<CrewPage crewData={crewData}/>} />
+
+                </Routes>
+                <Footer links={companyData?.links}/>
+            </div>
+        </Router>
+    );
 }
 
 export default App;

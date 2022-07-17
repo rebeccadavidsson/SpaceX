@@ -1,0 +1,1 @@
+export const SPACE_API_BASE_URL = process.env.SPACE_API_BASE_URL || 'https://api.spacexdata.com/v4';
