@@ -31,7 +31,7 @@ const CrewMemberCard = (props: { member: CrewMember }) => {
             <img className="object-cover object-top rounded-md h-64 w-full member-image md:block"
                  src={props.member.image}
                  alt=""/>
-            <div className={"heart-overlay md:block hidden " +
+            <div className={"heart-overlay hidden md:block " +
                 (likedMembers.includes(props.member.id) ? 'liked-member light ' : null) +
                 (shake ? 'shake' : null)}></div>
             <div className="flex justify-between">

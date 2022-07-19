@@ -36,7 +36,7 @@ export const setLikedMembers = (likedMemberIds: string[]) => {
 export const handleLikeMember = (id: string) => {
     const likedMembers = getLikedMembersFromLocalStorage();
 
-    // Initially, likedMembers from localStorage is an object
+    // When never set before, likedMembers from localStorage is an object
     if (Object.keys(likedMembers).length || likedMembers.length) {
 
         // Remove id if it is found in localStorage -> this member was already liked before
