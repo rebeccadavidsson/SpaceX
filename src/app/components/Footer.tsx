@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = ({links}: { links?: Links }) => {
     return (
-        <footer className="p-4 md:px-8 md:py-12">
+        <footer className="p-4 md:px-8 md:py-12" data-cy="footer">
             <div className="sm:flex sm:items-center sm:justify-between container">
                 <ul className="flex flex-wrap items-center mb-6 text-sm sm:mb-0 ">
                     <li>

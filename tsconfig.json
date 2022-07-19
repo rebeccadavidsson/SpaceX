@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["cypress", "jest"],
     "target": "es5",
     "lib": [
       "dom",
@@ -16,11 +17,14 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noEmit": true,
     "jsx": "react-jsx"
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "**/*.spec.ts"
   ]
 }

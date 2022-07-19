@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
-
 const NavBar = () => {
-    return (<nav className=" px-2 sm:px-4 py-10">
-        <div className="container flex flex-wrap justify-between items-center mx-auto">
+    return (
+        <nav data-cy="nav" className=" px-2 sm:px-4 py-10 ">
+        <div className="container max-w-5xl flex flex-wrap justify-between items-center mx-auto">
             <Link to={"/"}>
                 <span
                     className="self-center text-xl font-semibold whitespace-nowrap"><strong>SpaceX</strong></span>

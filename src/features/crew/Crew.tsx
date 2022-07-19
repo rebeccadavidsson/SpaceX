@@ -2,26 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { CrewMember } from './types';
 import CrewMemberCard from '../../app/components/CrewMemberCard';
 import ScrollReveal from '../../utils/ScrollReveal';
+import { getGridChunks } from '../../utils/helpers';
 
 export function Crew({crewData}: { crewData: CrewMember[] }) {
     const chunkSize = 3;
-    const getGridChunks = (crewData: CrewMember[]) => {
-        const data = [...crewData];
-        return [...Array(Math.ceil(data.length / chunkSize))].map(_ => data.splice(0, chunkSize));
-    }
-
     const [crew, setCrew] = useState<CrewMember[][]>([]);
     const [showButton, setShowButton] = useState(true);
 
     useEffect(() => {
         const data = [...crewData];
-        setCrew(getGridChunks(data.slice(0, chunkSize)));
+        setCrew(getGridChunks(data.slice(0, chunkSize), chunkSize));
     }, [crewData]);
-
 
     return (
         <ScrollReveal>
-            <div className="py-12 mx-auto xl:items-center xL:-mx-4">
+            <div className="py-12 mx-auto xl:items-center xL:-mx-4" data-cy="crew-members">
                 <h2 className="text-2xl font-semibold text-gray-100 pb-8 pt-8 text-right">The Crew</h2>
 
                 {crew.map((grid: CrewMember[], row: number) => {
@@ -47,9 +42,10 @@ export function Crew({crewData}: { crewData: CrewMember[] }) {
                 {showButton &&
                     <div className="flex justify-end" onClick={() => setShowButton(false)}>
                         <button
-                            onClick={() => setCrew(getGridChunks(crewData))}
+                            data-cy="load-more-crew"
+                            onClick={() => setCrew(getGridChunks(crewData, chunkSize))}
                             className="text-slate-200 bg-gray-900 hover:bg-gray-800 font-bold py-2 px-8 rounded">
-                            More
+                            Show More
                         </button>
                     </div>
                 }

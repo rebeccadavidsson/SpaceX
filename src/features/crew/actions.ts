@@ -2,6 +2,7 @@ import axios from 'axios'
 import { SPACE_API_BASE_URL } from '../../utils/urls';
 import { Dispatch } from 'react';
 import { CrewMember } from './types';
+import { getLikedMembersFromLocalStorage } from '../../utils/helpers';
 
 export enum Status {
     Idle = 1,
@@ -15,7 +16,6 @@ export const SET_CREW_FAILURE = 'SET_CREW_FAILURE';
 export const SET_LIKED_MEMBERS_SUCCESS = 'SET_LIKED_MEMBERS_SUCCESS';
 export const HANDLE_LIKE_MEMBER = 'HANDLE_LIKE_MEMBER';
 export const LIKED_MEMBERS = 'LIKED_MEMBERS';
-
 
 export const loadingCrew = () => {
     return {type: LOADING_CREW, payload: Status.Loading}
@@ -34,16 +34,24 @@ export const setLikedMembers = (likedMemberIds: string[]) => {
 }
 
 export const handleLikeMember = (id: string) => {
-    const likedMembers = JSON.parse(localStorage.getItem(LIKED_MEMBERS) || '{}');
+    const likedMembers = getLikedMembersFromLocalStorage();
+
+    // Initially, likedMembers from localStorage is an object
     if (Object.keys(likedMembers).length || likedMembers.length) {
+
+        // Remove id if it is found in localStorage -> this member was already liked before
         if (likedMembers.includes(id)) {
             const index = likedMembers.indexOf(id);
             index > -1 && likedMembers.splice(index, 1);
             window.localStorage.setItem(LIKED_MEMBERS, JSON.stringify(likedMembers))
         } else {
+
+            // Add id to already existing members in localstorage
             window.localStorage.setItem(LIKED_MEMBERS, JSON.stringify(likedMembers.concat([id])))
         }
     } else {
+
+        // Set initial array with member-ids
         window.localStorage.setItem(LIKED_MEMBERS, JSON.stringify([id]))
     }
     return {type: HANDLE_LIKE_MEMBER, payload: id}
@@ -53,8 +61,7 @@ export const getCrew = () => {
     return (dispatch: Dispatch<any>) => {
         dispatch(loadingCrew());
 
-        // Load alread-liked members from localstorage and save to store
-        const likedMemberIds = JSON.parse(localStorage.getItem(LIKED_MEMBERS) || '{}');
+        const likedMemberIds = getLikedMembersFromLocalStorage();
         likedMemberIds && dispatch(setLikedMembers(likedMemberIds));
 
         // Fetch data from API

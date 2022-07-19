@@ -19,7 +19,7 @@ const Search: FC<SearchProps> = ({data}) => {
 
     const sortByName = (): void => {
         setSortCategory('name');
-        setSortedData([...data].sort((a: CrewMember, b: CrewMember) => a['name'].localeCompare(b['name'])));
+        setSortedData([...data].sort((a: CrewMember, b: CrewMember) => a.name.localeCompare(b.name)));
     };
 
     const sortByAgency = (): void => {
@@ -33,8 +33,9 @@ const Search: FC<SearchProps> = ({data}) => {
 
     return (
         <div>
-            <div className="relative pb-16 pt-24">
+            <div className="relative pb-16 md:pt-24 pt-4">
                 <input
+                    data-cy="search"
                     onChange={(e) => handleChange(e)}
                     type="search" id="default-search"
                     className="md:w-2/3 m-0 m-auto block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700"

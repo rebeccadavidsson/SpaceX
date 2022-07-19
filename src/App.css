@@ -1,3 +1,4 @@
+/* General */
 body {
   background: rgb(11,11,11);
   background: linear-gradient(153deg, rgba(11,11,11,1) 0%, rgba(41,41,41,1) 58%, rgba(11,11,11,1) 100%);
@@ -8,17 +9,21 @@ body {
   color: #efefef;
 }
 
-.social-icons svg {
-  width: 20px;
-  height: 20px;
-}
 
+/* Footer */
 footer {
   margin-top:auto;
   background: rgb(38,38,38);
   background: linear-gradient(180deg, rgba(38,38,38,0) 0%, rgba(0,0,0,0.7161458333333333) 54%);
 }
 
+.social-icons svg {
+  width: 20px;
+  height: 20px;
+}
+
+
+/* Crew members */
 .heart-overlay {
   background: url("./assets/heart.png") no-repeat;
   width: 24px;
@@ -34,16 +39,17 @@ footer {
   -o-transition: opacity 0.3s ease-in-out;
   transition: opacity 0.3s ease-in-out;
 }
-
+.heart-overlay.hidden {
+  display: none;
+}
 
 .crew-member:hover .heart-overlay, .liked-member {
   opacity: 1;
+  transition: 0.3s ease;
 }
 
-.member-image:hover {
-  transition: 0.3s;
-  -webkit-filter: grayscale(1);
-  filter: grayscale(1);
+.liked-member.light {
+  filter: opacity(0.3);
 }
 
 .shake{
@@ -59,4 +65,18 @@ footer {
   57%  { transform: scale(1,1)    translateY(-7px); }
   64%  { transform: scale(1,1)    translateY(0); }
   100% { transform: scale(1,1)    translateY(0); }
+}
+
+@media screen and (max-width: 640px) {
+  .heart-overlay {
+    position: relative;
+  }
+}
+
+@media screen and (min-width: 641px) {
+  .member-image:hover {
+    transition: 0.3s;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+  }
 }
